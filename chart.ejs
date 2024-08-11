@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Chart</title>
+    <style>
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        #chartContainer {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chartContainer">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+        function decodeHtmlEntities(str) {
+            return str.replace(/&#39;/g, "'")
+                      .replace(/&#34;/g, '"')
+                      .replace(/&amp;/g, '&')
+                      .replace(/&lt;/g, '<')
+                      .replace(/&gt;/g, '>')
+                      .replace(/&nbsp;/g, ' ')
+                      .replace(/&quot;/g, '"');
+        }
+
+        <% if (typeof chartConfig !== 'undefined') { %>
+            // Log the raw chartConfig to see how it looks before decoding
+            <%- chartConfig %>
+            // Create and render the chart if config is valid
+            try {
+                document.getElementById('chartContainer').style.display = 'block';
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx,config );
+            } catch(error) {
+                console.error('Invalid chart configuration.');
+            }
+        <% } %>
+    </script>
+</body>
+</html>
